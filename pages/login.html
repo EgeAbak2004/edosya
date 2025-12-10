@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,21 +52,20 @@
         </div>
     </nav>
 
-    <main class="container-fluid upload-main">
-        <section class="upload">
-            <h1 class="upload-title">Dosya Yükle</h1>
-            <div class="card upload-box">
-                <input type="file" id="upload" class="upload-input">
-                <i class="fa-solid fa-upload upload-Icon"></i>
-                <footer class="upload-footer">
-                    <p class="upload-subtitle">mp4 mp3 jpg png apk zip daha fazlası</p>
-                </footer>
-            </div>
+    <main class="container-fluid auth-main">
+        <h1>Login</h1>
 
-            <button class="btn btn-primary" onclick="Upload()">Gönder</button>
-        </section>
+        <div class="mb-3 auth-form">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="mb-3 auth-form">
+            <label for="exampleFormControlInput1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="pass" name="pass">
+        </div>
+
+        <button class="btn btn-primary">Login</button>
     </main>
-    <script src="../Cloudinary/upload.js"></script>
 </body>
 
 </html>
