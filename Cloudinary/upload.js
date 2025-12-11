@@ -31,4 +31,5 @@ const Upload = async () => {
 
     UploadDb(data.public_id, data.format, data.created_at, data.original_filename, data.bytes);
 
+
 }

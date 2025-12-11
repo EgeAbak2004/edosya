@@ -30,6 +30,8 @@ const registerbtn = document.getElementById("registerbtn");
 const loginbtn = document.getElementById("loginbtn");
 const registerhref = document.getElementById("registerhref");
 const loginhref = document.getElementById("loginhref");
+const table = document.getElementById("table");
+
 
 const uploadmain = document.getElementById("upoadmain");
 
@@ -50,7 +52,10 @@ onAuthStateChanged(auth, (user) => {
     loginhref.style.display = "none";
     if (uploadmain != null) {
       uploadmain.style.display = "flex";
+    }
 
+    if (table != null) {
+      table.style.display = "flex";
     }
 
   }
@@ -60,6 +65,9 @@ onAuthStateChanged(auth, (user) => {
     if (uploadmain != null) {
       uploadmain.style.display = "none";
 
+    }
+    if (table != null) {
+      table.style.display = "none";
     }
   }
 })
@@ -93,43 +101,53 @@ const Login = async () => {
 
 
 export const UploadDb = (fileid, type, date, name, size) => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const parent = ref(db, `upload/${user.uid}/${fileid}`);
-      set(parent, {
-        target: 0,
-        send: "ege",
-        type: type,
-        id: fileid,
-        date, date,
-        name: name,
-        size: size
-      })
-    }
-    else {
+  try {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const parent = ref(db, `upload/${user.uid}/${fileid}`);
+        set(parent, {
+          target: 0,
+          send: "ege",
+          type: type,
+          id: fileid,
+          date, date,
+          name: name,
+          size: size
+        })
+      }
+      else {
 
-    }
+      }
 
-  })
+    })
+    alert("Başarlı biçimde dosya yükledin")
+
+  } catch (error) {
+    alert("dosya yüklemesi başarısız oldu")
+
+  }
+
 
 }
 
 const FilesDataGet = () => {
-  onAuthStateChanged(auth, (user) => {
+  if (table != null) {
+
+
+    const loadinmain = document.getElementById("loadinmain");
+    loadinmain.style.display = "flex";
+    table.style.display = "none";
+    onAuthStateChanged(auth, (user) => {
 
 
 
 
 
 
-    const dbref = ref(db);
-    get(child(dbref, `upload/${user.uid}`)).then((snap) => {
+      const dbref = ref(db);
+      get(child(dbref, `upload/${user.uid}`)).then((snap) => {
 
-      if (snap.exists()) {
-        const data = snap.val();
-        const count = data ? Object.keys(data).length : 0;
-        console.log("count:", count);
-        for (let d = 0; d < count; d++) {
+        if (snap.exists()) {
           const tablespawn = document.getElementById("filetable");
 
 
@@ -140,6 +158,7 @@ const FilesDataGet = () => {
             let td2 = document.createElement("td");
             let td3 = document.createElement("td");
             let td4 = document.createElement("td");
+            let td5 = document.createElement("td");
             td.textContent = data.child("type").val();
             td2.textContent = data.child("name").val();
             td3.textContent = data.child("size").val() + "by";
@@ -148,20 +167,31 @@ const FilesDataGet = () => {
             tr.append(td2)
             tr.append(td3)
             tr.append(td4)
-
+            tr.append(td5)
             tablespawn.appendChild(tr);
 
 
-
-
-
-          });
+            td5.innerHTML = `
+  <a 
+    href="https://res.cloudinary.com/dvdw9titb/image/upload/fl_attachment/v1765491358/${data.child("id").val()}.${data.child("type").val()}"
+    download="${data.child("id").val()}.${data.child("type").val()}"
+    class="btn btn-primary"
+  >
+    <i class="fa-solid fa-download"></i>
+  </a>
+`;
+            loadinmain.style.display = "none";
+            table.style.display = "flex";
+          })
 
         }
-      }
-    })
+      })
+        .catch((err) => {
+          alert("Birşeyler ters gitti lütfen sonra deneyniz");
+        })
 
-  })
+    })
+  }
 }
 
 FilesDataGet();
