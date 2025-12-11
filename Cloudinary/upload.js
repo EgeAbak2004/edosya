@@ -28,6 +28,7 @@ const Upload = async () => {
     const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, { method: "POST", body: formdata });
 
     const data = await res.json();
-    UploadDb(data.public_id, data.format, data.created_at);
+
+    UploadDb(data.public_id, data.format, data.created_at, data.original_filename, data.bytes);
 
 }

@@ -92,7 +92,7 @@ const Login = async () => {
 }
 
 
-export const UploadDb = (fileid, type, date) => {
+export const UploadDb = (fileid, type, date, name, size) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const parent = ref(db, `upload/${user.uid}/${fileid}`);
@@ -102,6 +102,8 @@ export const UploadDb = (fileid, type, date) => {
         type: type,
         id: fileid,
         date, date,
+        name: name,
+        size: size
       })
     }
     else {
@@ -139,8 +141,8 @@ const FilesDataGet = () => {
             let td3 = document.createElement("td");
             let td4 = document.createElement("td");
             td.textContent = data.child("type").val();
-            td2.textContent = data.child("id").val();
-            td3.textContent = data.child("id").val();
+            td2.textContent = data.child("name").val();
+            td3.textContent = data.child("size").val() + "by";
             td4.textContent = data.child("date").val();
             tr.append(td)
             tr.append(td2)
