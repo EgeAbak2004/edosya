@@ -102,20 +102,27 @@ onAuthStateChanged(auth, (user) => {
   }
 })
 const Register = async () => {
+
   console.log("çalıştı");
   const email = document.getElementById("email");
   const pass = document.getElementById("pass");
   const passcotrol = document.getElementById("passcotrol");
 
+  if (email != "" && pass.value.length > 8 && passcotrol.value.length > 8 && pass.value == passcotrol.value) {
 
-  await createUserWithEmailAndPassword(auth, email.value, pass.value)
-    .then((user) => {
 
-      document.location.replace("http://127.0.0.1:5500/pages/index.html")
-    })
-    .catch((err) => {
+    await createUserWithEmailAndPassword(auth, email.value, pass.value)
+      .then((user) => {
 
-    })
+        document.location.replace("http://127.0.0.1:5500/pages/index.html")
+      })
+      .catch((err) => {
+        alert("hata oldu")
+      })
+  }
+  else {
+    alert("şifreler ulaşmıyor");
+  }
 }
 
 const Login = async () => {
@@ -124,7 +131,7 @@ const Login = async () => {
   await signInWithEmailAndPassword(auth, email.value, pass.value).then((user) => {
     document.location.replace("http://127.0.0.1:5500/pages/index.html")
   }).catch((err) => {
-
+    alert("Giriş Bilgileri eksik")
   })
 
 }
@@ -171,6 +178,7 @@ const FilesDataGet = () => {
       if (user) {
         loadinmain.style.display = "flex";
         table.style.display = "none";
+        nofile.style.display = "none";
 
 
 
@@ -180,7 +188,7 @@ const FilesDataGet = () => {
 
           if (snap.exists()) {
             const tablespawn = document.getElementById("filetable");
-
+            const nofile = document.getElementById("nofile");
 
 
             snap.forEach(data => {
@@ -213,8 +221,13 @@ const FilesDataGet = () => {
 `;
               loadinmain.style.display = "none";
               table.style.display = "flex";
+
             })
 
+          }
+          else {
+            loadinmain.style.display = "none";
+            nofile.style.display = "flex";
           }
         })
           .catch((err) => {

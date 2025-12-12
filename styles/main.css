@@ -14,7 +14,8 @@
 
 .home-title {
     font-size: clamp(20pt, 4vw, 60pt);
-    color: white;
+    color: rgb(255, 0, 0);
+    font-weight: bold;
 }
 
 
@@ -79,4 +80,38 @@
     height: 100%;
     position: absolute;
     opacity: 0;
+}
+
+.nofile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.nofileicon {
+    font-size: 50pt;
+    color: black;
+}
+
+.nofiletitle {
+    font-size: 20pt;
+}
+
+@media only screen and (max-width:600px) {
+    .auth-form {
+        width: 60% !important;
+    }
+
+    .home-title {
+        font-size: 14pt !important;
+    }
+
+    .home-subtitle {
+        font-size: 12pt !important;
+    }
+
+
 }
