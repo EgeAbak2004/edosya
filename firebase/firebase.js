@@ -35,7 +35,8 @@ const exitbtn = document.getElementById("exitbtn");
 const wring = document.getElementById("wring");
 const loadinmain = document.getElementById("loadinmain");
 const uploadmain = document.getElementById("upoadmain");
-
+const uploaddeleytext = document.getElementById("uploaddeleytext");
+const upload = document.getElementById("upload");
 if (registerbtn != null) {
   registerbtn.addEventListener("click", () => Register())
 }
@@ -125,6 +126,8 @@ const Register = async () => {
   }
 }
 
+
+
 const Login = async () => {
   const email = document.getElementById("email");
   const pass = document.getElementById("pass");
@@ -138,6 +141,7 @@ const Login = async () => {
 
 
 export const UploadDb = (fileid, type, date, name, size) => {
+
   try {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -158,7 +162,7 @@ export const UploadDb = (fileid, type, date, name, size) => {
 
     })
     alert("Başarlı biçimde dosya yükledin")
-
+    uploaddeleytext.style.display = "none";
   } catch (error) {
     alert("dosya yüklemesi başarısız oldu")
 

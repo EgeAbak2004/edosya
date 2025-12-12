@@ -1,11 +1,15 @@
-import { UploadDb } from "http://127.0.0.1:5500/firebase/auth.js";
+import { UploadDb } from "http://127.0.0.1:5500/firebase/firebase.js";
 
 const uploadsendbtn = document.getElementById("uploadsendbtn");
+
+const uploaddeleytext = document.getElementById("uploaddeleytext");
+
 
 if (uploadsendbtn != null) {
     uploadsendbtn.addEventListener("click", () => Upload())
 }
 const Upload = async () => {
+    uploaddeleytext.style.display = "flex";
 
 
     const uploadinput = document.getElementById("upload").files[0];
