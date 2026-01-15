@@ -1,4 +1,4 @@
-import { UploadDb } from "http://127.0.0.1:5500/firebase/firebase.js";
+import { UploadDb } from "https://edosya-d2c16.web.app/firebase/firebase.js";
 
 const uploadsendbtn = document.getElementById("uploadsendbtn");
 
