@@ -115,7 +115,7 @@ const Register = async () => {
     await createUserWithEmailAndPassword(auth, email.value, pass.value)
       .then((user) => {
 
-        document.location.replace("http://127.0.0.1:5500/pages/index.html")
+        document.location.replace("https://edosya-d2c16.web.app/index.html")
       })
       .catch((err) => {
         alert("hata oldu")
@@ -132,7 +132,7 @@ const Login = async () => {
   const email = document.getElementById("email");
   const pass = document.getElementById("pass");
   await signInWithEmailAndPassword(auth, email.value, pass.value).then((user) => {
-    document.location.replace("http://127.0.0.1:5500/pages/index.html")
+    document.location.replace("https://edosya-d2c16.web.app/index.html")
   }).catch((err) => {
     alert("Giriş Bilgileri eksik")
   })
